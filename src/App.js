@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Home from "./component/Home";
+import User from "./component/User";
+import Info from "./component/Info";
 
 function App() {
+
+
+/* 
+1. 라우터를 사용하려면 index.js에서 BrowserRouter로 감싸줌
+2. Ruotes를 이용해서 경로에 대한 컴포넌트를 지정
+*/
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/user' element={<User/>}/>
+      <Route path='/info' element={<Info/>}/>
+    </Routes>
   );
 }
 
