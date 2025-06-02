@@ -1,66 +1,34 @@
-import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
+import { decrease, increase } from "./redux/CountReducer";
+import Child from "./redux/Child";
+
 
 function App(){
-    // npm install axios
 
-    async function some(){
-        return "hello";
-    }
-    const handleClick = async()=>{
-        // axios.get('https://raw.githubusercontent.com/yopy0817/data_example/master/hi.json')
-        // .then( response => {
-        //     console.log(response);
-        //     console.log(response.data);
-        // })
+    // redux와 redux toolkit설치
+    // npm install redux react-redux
+    // npm install @reduxjs/toolkit
 
-        // 무한콜백
+    // state를 사용할때 - useSelector
+    // state를 업데이트 - dispatcher
 
-        // 비동기
-        // axios.get('https://raw.githubusercontent.com/yopy0817/data_example/master/hi.json')
-        // .then( response => {
-        //     console.log(response.data);
-        //     console.log(1);
+    const count = useSelector(state =>{
+        // console.log(state); // 여기서 관리되는 값을 뽑아서 return
+        return state.count.value;
+    })
 
-        //     axios.get('https://raw.githubusercontent.com/yopy0817/data_example/master/hi.json')
-        //     .then( response => {
-        //         console.log(response.data);
-        //         console.log(2);
-
-        //         axios.get('https://raw.githubusercontent.com/yopy0817/data_example/master/hi.json')
-        //         .then( response => {
-        //             console.log(response.data);
-        //             console.log(3);
-        //         })
-        //     })
-        // })
-
-        // 규칙1 - await키워드는 async 함수 안에서 사용할 수 있음
-        // 규칙3 - 리턴이 프로미스라면 await를 붙이고 then을 생략가능
-        // 장점 - 코드의 간결성
-        // 장점 - 동기적으로 변하게 됨
-        const response = await axios.get('https://raw.githubusercontent.com/yopy0817/data_example/master/hi.json')
-        console.log(response);
-
-        const response2 = await axios.get('https://raw.githubusercontent.com/yopy0817/data_example/master/hello.json')
-        console.log(response2);
-        
-        
-        const response3 = await axios.get('https://raw.githubusercontent.com/yopy0817/data_example/master/by.json')
-        console.log(response3);
-        
-        const response4 = await fetch('https://raw.githubusercontent.com/yopy0817/data_example/master/hi.json')
-        const result = await response4.json();
-        console.log(result);
-        
-    }
-
-
-
+    const dispatcher = useDispatch();
 
     return(
+
         <>
-            <h3>엑시오스 사용</h3>
-            <button type = "button" onClick={handleClick}>데이터 처리</button>
+            <h3>리덕스 예제</h3>
+            현재 카운트 : {count}
+
+            <button type='button' onClick={()=>dispatcher( increase() )}>증가</button>
+            <button type='button' onClick={()=>dispatcher( decrease() )}>감소</button>
+
+            <Child/>
         </>
     )
 }
